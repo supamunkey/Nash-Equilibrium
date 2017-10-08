@@ -1,3 +1,5 @@
+package game;
+
 import model.Player;
 import model.Strategy;
 
@@ -8,7 +10,7 @@ public class NashGame {
     private Player playerOne;
     private Player playerTwo;
 
-    NashGame(String playerOne, String playerTwo, int boardSize) {
+    public NashGame(String playerOne, String playerTwo, int boardSize) {
         initializeGameBoard(boardSize);
         this.playerOne = new Player(playerOne, 1);
         this.playerTwo = new Player(playerTwo, 2);
