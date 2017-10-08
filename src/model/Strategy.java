@@ -5,6 +5,10 @@ public class Strategy {
     private int[] playerStrategies = new int[2];
     private boolean[] nashCandidates = new boolean[2];
 
+    /**
+     * @param index Represents the player who's strategy should be retrieved
+     * @return      The value of a players strategy as type int.
+     */
     public int getStrategyWeight(int index) {
         return playerStrategies[index];
     }
