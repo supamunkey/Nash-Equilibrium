@@ -1,8 +1,6 @@
 import model.Player;
 import model.Strategy;
 
-import java.util.InputMismatchException;
-
 public class NashGame {
 
     private Strategy[][] strategies;
@@ -37,10 +35,13 @@ public class NashGame {
      * @param row         The row for a strategy placement
      * @param column      The column for a strategy placement within the board
      * @param value       The value of a strategy
+     *
+     * @exception RuntimeException Throws exception if the playerIndex
+     *                             exceeds the supported amount of players
      */
-    void addStrategyToBoard(int playerIndex, int row, int column, int value) {
+    public void addStrategyToBoard(int playerIndex, int row, int column, int value) {
         if (playerIndex > 1) {
-            throw new InputMismatchException("This game only supports 2 players");
+            throw new RuntimeException("This game only supports 2 players");
         }
 
         strategies[row][column].addStrategy(playerIndex, value);
@@ -48,7 +49,7 @@ public class NashGame {
 
     public String getPlayerName(int player) {
         if (player > 2 || player < 1) {
-            throw new InputMismatchException("Unable to find player " + player);
+            throw new RuntimeException("Unable to find player " + player);
         }
 
         if (player == 1) {
@@ -57,11 +58,11 @@ public class NashGame {
         return playerTwo.getPlayerName();
     }
 
-    int boardLength() {
+    public int boardLength() {
         return strategies.length;
     }
 
-    Strategy[][] getBoard() {
+    public Strategy[][] getBoard() {
         return strategies;
     }
 
@@ -113,6 +114,9 @@ public class NashGame {
      *
      * @return                  The strategy object containing the weighted
      *                          strategies for both players
+     *
+     * @exception RuntimeException Throws a runtime exception in the event the opposingPlayer and/or
+     *                             selectedPlayer is outside of the bounds of the strategies array
      */
     private Strategy getStrategy(int playerNumber, int opposingPlayer, int selectedPlayer) {
         switch (playerNumber) {
@@ -139,7 +143,7 @@ public class NashGame {
      * Checks to see if a game board contains a nash equilibrium
      * and displays all, if found
      */
-    void findNashEqualities() {
+    public void findNashEqualities() {
         findBestStrategiesForPlayer(playerOne);
         findBestStrategiesForPlayer(playerTwo);
         printNashEqualities();
