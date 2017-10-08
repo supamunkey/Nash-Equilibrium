@@ -16,6 +16,12 @@ public class NashGame {
         this.playerTwo = new Player(playerTwo, 2);
     }
 
+    /**
+     * Initializes the games strategies board for an n*n game board
+     *
+     * @param boardSize The size of the game board e.g an n*n board where
+     *                  n is the boardSize
+     */
     private void initializeGameBoard(int boardSize) {
         strategies = new Strategy[boardSize][boardSize];
 
@@ -59,6 +65,12 @@ public class NashGame {
         return strategies;
     }
 
+    /**
+     * Traverses the strategies of a given player and sets their
+     * ideal strategies, as possible nash candidate, flag to true
+     *
+     * @param player    The player who's strategies are to be examined.
+     */
     private void findBestStrategiesForPlayer(Player player) {
 
         int playerNumber = player.getPlayerNumber();
@@ -66,8 +78,8 @@ public class NashGame {
         for (int i = 0; i < boardLength(); i++) {
             int max = -5; // Note: this needs to be updated if the min is changed
 
+            /* Run through the players strategies to find the ideal choice*/
             for (int j = 0; j < boardLength(); j++) {
-
                 int strategyWeight = getStrategy(playerNumber, i, j)
                         .getStrategyWeight(playerNumber);
 
@@ -76,6 +88,7 @@ public class NashGame {
                 }
             }
 
+            /* If a players strategy was found to be the ideal choice, set the candidate flag to true*/
             for (int k = 0; k < boardLength(); k++) {
                 int strategyWeight = getStrategy(playerNumber, i, k)
                         .getStrategyWeight(playerNumber);
@@ -88,6 +101,19 @@ public class NashGame {
         }
     }
 
+    /**
+     * Returns a strategy object.
+     *
+     * @param playerNumber      The player who's strategy is inspected
+     *
+     * @param opposingPlayer    The players who's strategy is inspected
+     *                          relative to the selectedPlayer
+     *
+     * @param selectedPlayer    The players who's strategy is inspected
+     *
+     * @return                  The strategy object containing the weighted
+     *                          strategies for both players
+     */
     private Strategy getStrategy(int playerNumber, int opposingPlayer, int selectedPlayer) {
         switch (playerNumber) {
             case 0:
@@ -109,6 +135,10 @@ public class NashGame {
         }
     }
 
+    /**
+     * Checks to see if a game board contains a nash equilibrium
+     * and displays all, if found
+     */
     void findNashEqualities() {
         findBestStrategiesForPlayer(playerOne);
         findBestStrategiesForPlayer(playerTwo);
