@@ -5,16 +5,8 @@ public class Strategy {
     private int[] playerStrategies = new int[2];
     private boolean[] nashCandidates = new boolean[2];
 
-    public int[] getStrategies() {
-        return playerStrategies;
-    }
-
     public int getStrategyWeight(int index) {
         return playerStrategies[index];
-    }
-
-    public boolean[] getNashCandidates() {
-        return nashCandidates;
     }
 
     /**
