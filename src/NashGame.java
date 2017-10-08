@@ -77,10 +77,10 @@ public class NashGame {
             }
 
             for (int k = 0; k < boardLength(); k++) {
-                int player1DecisionWeight = getStrategy(playerNumber, i, k)
+                int strategyWeight = getStrategy(playerNumber, i, k)
                         .getStrategyWeight(playerNumber);
 
-                if (player1DecisionWeight == max) {
+                if (strategyWeight == max) {
                     getStrategy(playerNumber, i, k)
                             .setNashCandidateToTrue(playerNumber);
                 }
