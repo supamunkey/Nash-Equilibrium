@@ -1,5 +1,6 @@
 package game;
 
+import javafx.scene.control.Label;
 import model.Player;
 import model.Strategy;
 
@@ -131,6 +132,9 @@ public class NashGame {
         }
     }
 
+    /**
+     * Prints Nash Equilibrium's to the console for debugging purposes
+     */
     private void printNashEqualities() {
         for (int row = 0; row < boardLength(); row++) {
             for (int col = 0; col < boardLength(); col++) {
@@ -143,7 +147,29 @@ public class NashGame {
 
     /**
      * Checks to see if a game board contains a nash equilibrium
-     * and displays all, if found
+     * and displays it to GUI is equilibrium exists
+     * @param guiLabel  Label that will be displayed on Gui
+     *
+     * @return          The label containing the location of
+     *                  the winning Strategy
+     */
+    public Label printNashEqualitiesToGui(Label guiLabel) {
+        findBestStrategiesForPlayer(playerOne);
+        findBestStrategiesForPlayer(playerTwo);
+
+        for (int row = 0; row < boardLength(); row++) {
+            for (int col = 0; col < boardLength(); col++) {
+                if (strategies[row][col].isNashEquilibrium()) {
+                    guiLabel.setText(" Nash Equilibrium : (" + row + ", " + col + ")");
+                }
+            }
+        }
+        return guiLabel;
+    }
+
+    /**
+     * Checks to see if a game board contains a nash equilibrium
+     * and prints it to console for debugging purposes
      */
     public void findNashEqualities() {
         findBestStrategiesForPlayer(playerOne);

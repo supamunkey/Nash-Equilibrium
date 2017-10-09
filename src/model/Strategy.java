@@ -32,8 +32,18 @@ public class Strategy {
         return nashCandidates[0] && nashCandidates[1];
     }
 
+    /**
+     * @return  The strategy of each player to the console
+     */
     @Override
     public String toString() {
         return String.format("|\t(\t%2s  ,  %2s\t)\t|", playerStrategies[0], playerStrategies[1]);
+    }
+
+    /**
+     * @return  The strategy of each player to the GUI
+     */
+    public String displayValuesInGui(){
+        return String.format("\t%2s  ,  %2s\t", playerStrategies[0], playerStrategies[1]);
     }
 }
